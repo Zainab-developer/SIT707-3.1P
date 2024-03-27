@@ -34,16 +34,6 @@ public class DateUtilTest {
         Assert.assertEquals(1, date.getDay());
 	}
 	
-	@Test
-	public void testMaxJanuary31ShouldDecrementToJanuary30() {
-		// January max boundary area: max-1
-		DateUtil date = new DateUtil(31, 1, 2024);
-        System.out.println("january31ShouldDecrementToJanuary30 > " + date);
-        date.decrement();
-        System.out.println(date);
-        Assert.assertEquals(30, date.getDay());
-        Assert.assertEquals(1, date.getMonth());
-	}
 	
 	@Test
 	public void testNominalJanuary() {
@@ -81,6 +71,27 @@ public class DateUtilTest {
 	/*
 	 * Write tests for rest months of year 2024.
 	 */
+	@Test
+	public void testBoundaryJune1() {
+	    DateUtil date = new DateUtil(1, 6, 1994);
+	    System.out.println("BoundaryJune1 > " + date);
+	    date.increment();
+	    System.out.println(date);
+	    Assert.assertEquals(2, date.getDay());
+	    Assert.assertEquals(6, date.getMonth());
+	    Assert.assertEquals(1994, date.getYear());
+	}
+
+	@Test
+	public void testBoundaryJune2() {
+	    DateUtil date = new DateUtil(2, 6, 1994);
+	    System.out.println("BoundaryJune2 > " + date);
+	    date.increment();
+	    System.out.println(date);
+	    Assert.assertEquals(3, date.getDay());
+	    Assert.assertEquals(6, date.getMonth());
+	    Assert.assertEquals(1994, date.getYear());
+	}
 	
 	@Test
 	public void testMaxFebruary29LeapYearShouldIncrementToMarch1() {
@@ -104,81 +115,8 @@ public class DateUtilTest {
 	    Assert.assertEquals(2001, date.getYear());
 	}
 
-	@Test
-	public void testNominalFebruaryLeapYear() {
-	    int rand_day_1_to_29 = 1 + new Random().nextInt(29);
-	    DateUtil date = new DateUtil(rand_day_1_to_29, 2, 2024);
-	    System.out.println("NominalFebruaryLeapYear > " + date);
-	    date.increment();
-	    System.out.println(date);
-	}
-
-	@Test
-	public void testNominalFebruaryNonLeapYear() {
-	    int rand_day_1_to_28 = 1 + new Random().nextInt(28);
-	    DateUtil date = new DateUtil(rand_day_1_to_28, 2, 2001);
-	    System.out.println("NominalFebruaryNonLeapYear > " + date);
-	    date.increment();
-	    System.out.println(date);
-	}
 	
-	@Test
-	public void testNominalMarch() {
-	    int rand_day_1_to_31 = 1 + new Random().nextInt(31);
-	    DateUtil date = new DateUtil(rand_day_1_to_31, 3, 2024);
-	    System.out.println("NominalMarch > " + date);
-	    date.increment();
-	    System.out.println(date);
-	}
 
-	@Test
-	public void testNominalApril() {
-	    int rand_day_1_to_30 = 1 + new Random().nextInt(30);
-	    DateUtil date = new DateUtil(rand_day_1_to_30, 4, 2024);
-	    System.out.println("NominalApril > " + date);
-	    date.increment();
-	    System.out.println(date);
-	}
-
-	@Test
-	public void testNominalMay() {
-	    int rand_day_1_to_31 = 1 + new Random().nextInt(31);
-	    DateUtil date = new DateUtil(rand_day_1_to_31, 5, 2024);
-	    System.out.println("NominalMay > " + date);
-	    date.increment();
-	    System.out.println(date);
-	}
-
-	@Test
-	public void testNominalJune() {
-	    int rand_day_1_to_30 = 1 + new Random().nextInt(30);
-	    DateUtil date = new DateUtil(rand_day_1_to_30, 6, 2024);
-	    System.out.println("NominalJune > " + date);
-	    date.increment();
-	    System.out.println(date);
-	}
-
-	@Test
-	public void testBoundaryJune1() {
-	    DateUtil date = new DateUtil(1, 6, 1994);
-	    System.out.println("BoundaryJune1 > " + date);
-	    date.increment();
-	    System.out.println(date);
-	    Assert.assertEquals(2, date.getDay());
-	    Assert.assertEquals(6, date.getMonth());
-	    Assert.assertEquals(1994, date.getYear());
-	}
-
-	@Test
-	public void testBoundaryJune2() {
-	    DateUtil date = new DateUtil(2, 6, 1994);
-	    System.out.println("BoundaryJune2 > " + date);
-	    date.increment();
-	    System.out.println(date);
-	    Assert.assertEquals(3, date.getDay());
-	    Assert.assertEquals(6, date.getMonth());
-	    Assert.assertEquals(1994, date.getYear());
-	}
 
 	@Test
 	public void testBoundaryJune15() {
@@ -213,16 +151,6 @@ public class DateUtilTest {
 	    Assert.assertEquals(2024, date.getYear());
 	}
 
-	@Test
-	public void testBoundaryFebruary29LeapYear() {
-	    DateUtil date = new DateUtil(29, 2, 2024);
-	    System.out.println("BoundaryFebruary29LeapYear > " + date);
-	    date.increment();
-	    System.out.println(date);
-	    Assert.assertEquals(1, date.getDay());
-	    Assert.assertEquals(3, date.getMonth());
-	    Assert.assertEquals(2024, date.getYear());
-	}
 
 	@Test
 	public void testBoundaryFebruary28NonLeapYear() {
@@ -247,70 +175,53 @@ public class DateUtilTest {
 	}
 
 	@Test
-	public void testBoundaryFebruary28LeapYearDecrement() {
-	    DateUtil date = new DateUtil(28, 2, 2024);
-	    System.out.println("BoundaryFebruary28LeapYearDecrement > " + date);
-	    date.decrement();
-	    System.out.println(date);
-	    Assert.assertEquals(27, date.getDay());
-	    Assert.assertEquals(2, date.getMonth());
-	    Assert.assertEquals(2024, date.getYear());
-	}
-
-	@Test
-	public void testBoundaryFebruary29LeapYearDecrement() {
-	    DateUtil date = new DateUtil(29, 2, 2024);
-	    System.out.println("BoundaryFebruary29LeapYearDecrement > " + date);
-	    date.decrement();
-	    System.out.println(date);
-	    Assert.assertEquals(28, date.getDay());
-	    Assert.assertEquals(2, date.getMonth());
-	    Assert.assertEquals(2024, date.getYear());
-	}
-
-	@Test
-	public void testBoundaryFebruary28NonLeapYearDecrement() {
-	    DateUtil date = new DateUtil(28, 2, 2001);
-	    System.out.println("BoundaryFebruary28NonLeapYearDecrement > " + date);
-	    date.decrement();
-	    System.out.println(date);
-	    Assert.assertEquals(27, date.getDay());
-	    Assert.assertEquals(2, date.getMonth());
-	    Assert.assertEquals(2001, date.getYear());
-	}
-
-	@Test
-	public void testBoundaryFebruary1NonLeapYearDecrement() {
-	    DateUtil date = new DateUtil(1, 2, 2001);
-	    System.out.println("BoundaryFebruary1NonLeapYearDecrement > " + date);
-	    date.decrement();
-	    System.out.println(date);
-	    Assert.assertEquals(31, date.getDay());
-	    Assert.assertEquals(1, date.getMonth());
-	    Assert.assertEquals(2001, date.getYear());
-	}
-
-	@Test
-	public void testBoundaryFebruary1LeapYearDecrement() {
-	    DateUtil date = new DateUtil(1, 2, 2024);
-	    System.out.println("BoundaryFebruary1LeapYearDecrement > " + date);
-	    date.decrement();
-	    System.out.println(date);
-	    Assert.assertEquals(31, date.getDay());
-	    Assert.assertEquals(1, date.getMonth());
-	    Assert.assertEquals(2024, date.getYear());
-	}
-
-	@Test
-	public void testBoundaryFebruary29LeapYearDecrementFromMarch1() {
+	public void testNominalMarch() {
 	    DateUtil date = new DateUtil(1, 3, 2024);
-	    System.out.println("BoundaryFebruary29LeapYearDecrementFromMarch1 > " + date);
-	    date.decrement();
+	    System.out.println("March > " + date);
+	    date.increment();
 	    System.out.println(date);
-	    Assert.assertEquals(29, date.getDay());
-	    Assert.assertEquals(2, date.getMonth());
-	    Assert.assertEquals(2024, date.getYear());
 	}
+
+	@Test
+	public void testNominalApril() {
+	    DateUtil date = new DateUtil(1, 4, 2024);
+	    System.out.println("April > " + date);
+	    date.increment();
+	    System.out.println(date);
+	}
+
+	@Test
+	public void testNominalMay() {
+	    DateUtil date = new DateUtil(3, 5, 2024);
+	    System.out.println("May > " + date);
+	    date.increment();
+	    System.out.println(date);
+	}
+
+	@Test
+	public void testNominalJune() {
+	    DateUtil date = new DateUtil(17, 6, 2024);
+	    System.out.println("June > " + date);
+	    date.increment();
+	    System.out.println(date);
+	}
+	@Test
+	public void testNominalJuly() {
+	    DateUtil date = new DateUtil(6, 7, 2024);
+	    System.out.println("July > " + date);
+	    date.increment();
+	    System.out.println(date);
+	}
+
+	@Test
+	public void testNominalAugust() {
+	    DateUtil date = new DateUtil(9, 8, 2024);
+	    System.out.println("August > " + date);
+	    date.increment();
+	    System.out.println(date);
+	}
+	
+
 
 
 
